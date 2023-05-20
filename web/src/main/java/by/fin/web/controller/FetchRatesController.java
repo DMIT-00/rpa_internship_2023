@@ -29,7 +29,7 @@ public class FetchRatesController {
         CurrencyDto currency = remoteRatesService.fetchCurrencyByAbbreviation(currencyAbbreviation)
                 .orElseThrow(() -> new EntityNotFoundException("Currency not found " + currencyAbbreviation));
 
-        return new ResponseEntity<>(remoteRatesService.fetchRatesByCurrencyAndDates(
+        return new ResponseEntity<>(remoteRatesService.fetchRatesByCurrencyIdAndDates(
                 currency.getId(),
                 startDate,
                 endDate
@@ -42,7 +42,7 @@ public class FetchRatesController {
             @RequestParam("startdate") LocalDate startDate,
             @RequestParam("enddate") LocalDate endDate
     ) {
-        List<RateDto> fetchedRates = remoteRatesService.fetchRatesByCurrencyAndDates(id, startDate, endDate);
+        List<RateDto> fetchedRates = remoteRatesService.fetchRatesByCurrencyIdAndDates(id, startDate, endDate);
 
         return new ResponseEntity<>(fetchedRates, HttpStatus.OK);
     }

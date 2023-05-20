@@ -20,27 +20,7 @@ public class RemoteRatesServiceImpl implements RemoteRatesService {
     private final String REMOTE_SERVICE_URL = "https://api.nbrb.by/exrates/";
 
     @Override
-    public Optional<CurrencyDto> fetchCurrencyByAbbreviation(String currencyAbbreviation) {
-        final String SERVICE_URL = REMOTE_SERVICE_URL + "currencies";
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        ResponseEntity<List<CurrencyDto>> currencies = restTemplate.exchange(
-                SERVICE_URL,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {}
-        );
-
-        Optional<CurrencyDto> currency = currencies.getBody().stream()
-                .filter(cur -> cur.getAbbreviation().equals(currencyAbbreviation))
-                .findFirst();
-
-        return currency;
-    }
-
-    @Override
-    public List<RateDto> fetchRatesByCurrencyAndDates(Long currencyId, LocalDate start, LocalDate end) {
+    public List<RateDto> fetchRatesByCurrencyIdAndDates(Long currencyId, LocalDate start, LocalDate end) {
         final String SERVICE_URL = REMOTE_SERVICE_URL + "rates/dynamics/";
 
         RestTemplate restTemplate = new RestTemplate();
