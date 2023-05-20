@@ -9,9 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = "by.fin")
 @EntityScan("by.fin.module.*")
 public class RpaApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(RpaApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(RpaApplication.class, args);
+    }
 }

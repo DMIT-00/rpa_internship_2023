@@ -15,10 +15,10 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class Weekends {
-private final WeekendService weekendService;
+    private final WeekendService weekendService;
 
     @GetMapping
-    public ResponseEntity<List<Weekend>>findAll(){
+    public ResponseEntity<List<Weekend>> findAll() {
         return new ResponseEntity<>(weekendService.findAll(), HttpStatus.OK);
     }
 }

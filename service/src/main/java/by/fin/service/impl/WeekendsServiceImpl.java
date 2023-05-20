@@ -13,10 +13,10 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class WeekendsServiceImpl implements WeekendService {
-   private final WeekendsRepository weekendsRepository;
+    private final WeekendsRepository weekendsRepository;
 
     @Override
     public List<Weekend> findAll() {
-       return weekendsRepository.findAll();
+        return weekendsRepository.findAll();
     }
 }
