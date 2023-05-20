@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>by.fin</groupId>
-            <artifactId>module</artifactId>
+            <artifactId>repository</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
