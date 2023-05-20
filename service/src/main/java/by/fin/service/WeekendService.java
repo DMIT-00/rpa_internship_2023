@@ -1,6 +1,6 @@
 package by.fin.service;
 
-import by.fin.module.entity.Weekend;
+import by.fin.repository.entity.Weekend;
 
 import java.util.List;
 

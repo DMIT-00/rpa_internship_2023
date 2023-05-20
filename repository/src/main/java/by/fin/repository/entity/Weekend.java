@@ -1,4 +1,4 @@
-package by.fin.module.entity;
+package by.fin.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

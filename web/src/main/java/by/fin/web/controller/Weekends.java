@@ -1,6 +1,6 @@
 package by.fin.web.controller;
 
-import by.fin.module.entity.Weekend;
+import by.fin.repository.entity.Weekend;
 import by.fin.service.WeekendService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

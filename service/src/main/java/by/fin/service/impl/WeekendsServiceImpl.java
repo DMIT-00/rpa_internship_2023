@@ -1,7 +1,7 @@
 package by.fin.service.impl;
 
-import by.fin.module.WeekendsRepository;
-import by.fin.module.entity.Weekend;
+import by.fin.repository.WeekendsRepository;
+import by.fin.repository.entity.Weekend;
 import by.fin.service.WeekendService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
