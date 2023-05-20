@@ -1,10 +1,9 @@
 package by.fin.module.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -21,7 +20,7 @@ public class Weekend {
     private Long weekendId;
 
     @Column(name = "calendar_date")
-    private Date calendarDate;
+    private LocalDate calendarDate;
 
     @Column(name = "is_day_off")
     private boolean isDayOff;
