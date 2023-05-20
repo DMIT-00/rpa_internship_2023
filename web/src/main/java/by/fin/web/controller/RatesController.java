@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/rates")
 @RestController
 @RequiredArgsConstructor
-public class Rates {
+public class RatesController {
     private final RatesService ratesService;
 }

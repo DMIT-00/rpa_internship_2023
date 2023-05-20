@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("api/fetch-rates")
 @RestController
 @RequiredArgsConstructor
-public class FetchRates {
+public class FetchRatesController {
     private final RatesService ratesService;
     private final RemoteRatesService remoteRatesService;
 

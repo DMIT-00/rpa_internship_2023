@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/fetch-currency")
 @RestController
 @RequiredArgsConstructor
-public class FetchCurrency {
+public class FetchCurrencyController {
     private final RemoteRatesService remoteRatesService;
 
     @GetMapping
