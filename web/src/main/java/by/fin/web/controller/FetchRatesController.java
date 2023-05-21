@@ -20,12 +20,12 @@ public class FetchRatesController {
 
     @GetMapping("/{id}")
     public ResponseEntity<List<RateDto>> fetchRatesByDate(
-            @PathVariable("id") Long id,
+            @PathVariable("id") Long currencyId,
             @RequestParam("startdate") LocalDate startDate,
             @RequestParam("enddate") LocalDate endDate
     ) {
-        List<RateDto> fetchedRates = remoteRatesService.fetchRatesByCurrencyIdAndDates(id, startDate, endDate);
+        List<RateDto> fetchedRates = remoteRatesService.fetchRatesByCurrencyIdAndDates(currencyId, startDate, endDate);
 
-        return new ResponseEntity<>(fetchedRates, HttpStatus.OK);
+        return new ResponseEntity<>(ratesService.addRates(currencyId, fetchedRates), HttpStatus.OK);
     }
 }

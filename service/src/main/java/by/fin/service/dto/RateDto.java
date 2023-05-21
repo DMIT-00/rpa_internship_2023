@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -18,7 +18,7 @@ public class RateDto {
     private Long currencyId;
 
     @JsonProperty("Date")
-    private Date date;
+    private LocalDate date;
 
     @JsonProperty("Cur_OfficialRate")
     private BigDecimal rate;

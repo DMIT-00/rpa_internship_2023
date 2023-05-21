@@ -8,9 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@ToString
 @Entity
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "rates")
@@ -26,9 +24,6 @@ public class Rate {
 
     @Column(name = "date")
     private LocalDate date;
-
-    @Column(name = "scale")
-    private Long scale;
 
     @Column(name = "rate")
     private BigDecimal rate;

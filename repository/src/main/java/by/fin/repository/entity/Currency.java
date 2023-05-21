@@ -8,9 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @Entity
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "currency")
@@ -25,6 +23,19 @@ public class Currency {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "currency", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Column(name = "scale")
+    private Long scale;
+
+    @OneToMany(mappedBy = "currency", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Rate> rates = new ArrayList<>();
+
+    public void addRate(Rate rate) {
+        rates.add(rate);
+        rate.setCurrency(this);
+    }
+
+    public void removeRate(Rate rate) {
+        rates.remove(rate);
+        rate.setCurrency(null);
+    }
 }

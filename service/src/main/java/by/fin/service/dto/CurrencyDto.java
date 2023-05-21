@@ -14,12 +14,12 @@ public class CurrencyDto {
     @JsonProperty("Cur_ID")
     private Long id;
 
-    @JsonProperty("Cur_Name")
-    private String name;
-
     @JsonProperty("Cur_Name_Eng")
-    private String englishName;
+    private String name;
 
     @JsonProperty("Cur_Abbreviation")
     private String abbreviation;
+
+    @JsonProperty("Cur_Scale")
+    private Long scale;
 }

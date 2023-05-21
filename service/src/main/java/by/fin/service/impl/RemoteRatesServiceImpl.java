@@ -4,6 +4,7 @@ import by.fin.service.RemoteRatesService;
 import by.fin.service.dto.CurrencyDto;
 import by.fin.service.dto.RateDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -15,18 +16,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class RemoteRatesServiceImpl implements RemoteRatesService {
-    private final String REMOTE_SERVICE_URL = "https://api.nbrb.by/exrates/";
+    private final static String REMOTE_SERVICE_URL = "https://api.nbrb.by/exrates/rates/dynamics/";
+
+    private final RestTemplate restTemplate;
+
+    public RemoteRatesServiceImpl(RestTemplateBuilder restTemplateBuilder) {
+        this.restTemplate = restTemplateBuilder.build();
+    }
 
     @Override
     public List<RateDto> fetchRatesByCurrencyIdAndDates(Long currencyId, LocalDate start, LocalDate end) {
-        final String SERVICE_URL = REMOTE_SERVICE_URL + "rates/dynamics/";
-
-        RestTemplate restTemplate = new RestTemplate();
-
         ResponseEntity<List<RateDto>> rates = restTemplate.exchange(
-                SERVICE_URL + currencyId + "?startdate=" + start.toString() + "&enddate=" + end.toString(),
+                REMOTE_SERVICE_URL + currencyId + "?startdate=" + start.toString() + "&enddate=" + end.toString(),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {}
