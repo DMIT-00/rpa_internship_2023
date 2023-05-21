@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class AverageRatesServiceImpl implements AverageRatesService {
     private final WeekendService weekendService;
 
     @Override
-    public RateDto calculateAverageRatesByMonthAndYear(long currencyId, short month, int year) {
+    public Optional<RateDto> calculateAverageRatesByMonthAndYear(long currencyId, short month, int year) {
         LocalDate start = LocalDate.of(year, month, 1);
         LocalDate end = start.withDayOfMonth(start.lengthOfMonth());
 
@@ -27,7 +28,11 @@ public class AverageRatesServiceImpl implements AverageRatesService {
 
         List<LocalDate> weekends = weekendService.findAllWeekendDatesBetween(start, end);
 
-        return new RateDto(currencyId, start, calculateGeometricalAverage(getWorkdaysRates(rates, weekends)));
+        List<BigDecimal> workdaysRates = getWorkdaysRates(rates, weekends);
+        if (workdaysRates.size() == 0)
+            return Optional.empty();
+
+        return Optional.of(new RateDto(currencyId, start, calculateGeometricalAverage(workdaysRates)));
     }
 
     private List<BigDecimal> getWorkdaysRates(List<RateDto> rates, List<LocalDate> weekends) {
@@ -38,7 +43,7 @@ public class AverageRatesServiceImpl implements AverageRatesService {
     }
 
     private static BigDecimal calculateGeometricalAverage(List<BigDecimal> values) {
-        if (values.size() < 1)
+        if (values.size() == 0)
             return BigDecimal.ZERO;
 
         BigDecimal product = BigDecimal.ONE;

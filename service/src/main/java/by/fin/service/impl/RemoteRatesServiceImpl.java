@@ -33,10 +33,7 @@ public class RemoteRatesServiceImpl implements RemoteRatesService {
                 .queryParam(END_PARAM, end);
 
         ResponseEntity<List<RateDto>> rates = restTemplate.exchange(
-                uri.toUriString(),
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {}
+                uri.toUriString(), HttpMethod.GET,null, new ParameterizedTypeReference<>() {}
         );
 
         return rates.getBody();
