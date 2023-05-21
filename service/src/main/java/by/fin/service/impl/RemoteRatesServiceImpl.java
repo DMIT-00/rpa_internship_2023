@@ -8,6 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,8 +25,15 @@ public class RemoteRatesServiceImpl implements RemoteRatesService {
 
     @Override
     public List<RateDto> fetchRatesByCurrencyIdAndDates(Long currencyId, LocalDate start, LocalDate end) {
+        final String START_PARAM = "startdate";
+        final String END_PARAM = "enddate";
+
+        UriComponentsBuilder uri = UriComponentsBuilder.fromUriString(REMOTE_SERVICE_URL + currencyId)
+                .queryParam(START_PARAM, start)
+                .queryParam(END_PARAM, end);
+
         ResponseEntity<List<RateDto>> rates = restTemplate.exchange(
-                REMOTE_SERVICE_URL + currencyId + "?startdate=" + start.toString() + "&enddate=" + end.toString(),
+                uri.toUriString(),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {}
