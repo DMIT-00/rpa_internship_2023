@@ -27,6 +27,8 @@ public class Rate {
     @Column(name = "rate", precision = 20, scale = 4)
     private BigDecimal rate;
 
+    @Getter
+    @Setter
     @AllArgsConstructor
     @NoArgsConstructor
     @EqualsAndHashCode
