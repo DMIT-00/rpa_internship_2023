@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class RateMapper {
     public static Rate fromDto(RateDto rateDto) {
         return new Rate(
-                null,
                 new Currency(rateDto.getCurrencyId(), null, null, null, new ArrayList<>()),
                 rateDto.getDate(),
                 rateDto.getRate()
