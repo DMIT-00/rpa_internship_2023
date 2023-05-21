@@ -1,16 +1,9 @@
 package by.fin.service.impl;
 
-import by.fin.repository.CurrencyRepository;
-import by.fin.repository.RatesRepository;
-import by.fin.repository.WeekendsRepository;
-import by.fin.repository.entity.Currency;
-import by.fin.repository.entity.Rate;
-import by.fin.repository.entity.Weekend;
 import by.fin.service.AverageRatesService;
 import by.fin.service.RatesService;
 import by.fin.service.WeekendService;
 import by.fin.service.dto.RateDto;
-import by.fin.service.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,16 +27,28 @@ public class AverageRatesServiceImpl implements AverageRatesService {
 
         List<LocalDate> weekends = weekendService.findAllWeekendDatesBetween(start, end);
 
-        List<RateDto> workdayRates = rates.stream()
+        return new RateDto(currencyId, start, calculateGeometricalAverage(getWorkdaysRates(rates, weekends)));
+    }
+
+    private List<BigDecimal> getWorkdaysRates(List<RateDto> rates, List<LocalDate> weekends) {
+        return rates.stream()
                 .filter(rate -> !weekends.contains(rate.getDate()))
-                .toList();
-
-        BigDecimal product = workdayRates.stream()
                 .map(RateDto::getRate)
-                .reduce(BigDecimal.ONE, BigDecimal::multiply);
+                .toList();
+    }
 
-        BigDecimal exponent = BigDecimal.ONE.divide(BigDecimal.valueOf(workdayRates.size()), MathContext.DECIMAL128);
+    private static BigDecimal calculateGeometricalAverage(List<BigDecimal> values) {
+        if (values.size() < 1)
+            return BigDecimal.ZERO;
 
-        return new RateDto(currencyId, start, BigDecimal.valueOf(Math.pow(product.doubleValue(), exponent.doubleValue())));
+        BigDecimal product = BigDecimal.ONE;
+
+        for (BigDecimal value : values) {
+            product = product.multiply(value);
+        }
+
+        BigDecimal exponent = BigDecimal.ONE.divide(BigDecimal.valueOf(values.size()), MathContext.DECIMAL128);
+
+        return BigDecimal.valueOf(Math.pow(product.doubleValue(), exponent.doubleValue()));
     }
 }
