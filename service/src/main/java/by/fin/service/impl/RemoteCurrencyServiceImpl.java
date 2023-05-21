@@ -2,8 +2,6 @@ package by.fin.service.impl;
 
 import by.fin.service.RemoteCurrencyService;
 import by.fin.service.dto.CurrencyDto;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

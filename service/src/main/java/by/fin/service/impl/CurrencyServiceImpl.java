@@ -6,7 +6,6 @@ import by.fin.service.CurrencyService;
 import by.fin.service.dto.CurrencyDto;
 import by.fin.service.dto.mapper.CurrencyMapper;
 import by.fin.service.exception.AlreadyExistsException;
-import by.fin.service.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

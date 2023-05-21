@@ -1,7 +1,10 @@
 package by.fin.repository.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -11,7 +14,9 @@ import java.time.LocalDate;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "rates")
+@Table(name = "rates", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"currency_id", "date"})
+})
 public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

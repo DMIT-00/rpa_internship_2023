@@ -1,9 +1,7 @@
 package by.fin.service.impl;
 
 import by.fin.service.RemoteRatesService;
-import by.fin.service.dto.CurrencyDto;
 import by.fin.service.dto.RateDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -13,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RemoteRatesServiceImpl implements RemoteRatesService {
