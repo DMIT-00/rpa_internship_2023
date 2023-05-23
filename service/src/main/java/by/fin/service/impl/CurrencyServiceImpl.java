@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,9 +30,19 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
+    public List<CurrencyDto> findAll() {
+        return CurrencyMapper.toDto(currencyRepository.findAll());
+    }
+
+    @Override
     public Optional<CurrencyDto> findCurrencyById(Long currencyId) {
         Optional<Currency> currency = currencyRepository.findById(currencyId);
 
         return currency.map(CurrencyMapper::toDto);
+    }
+
+    @Override
+    public List<CurrencyDto> findByAbbreviation(String abbreviation) {
+        return CurrencyMapper.toDto(currencyRepository.findByAbbreviation(abbreviation));
     }
 }
