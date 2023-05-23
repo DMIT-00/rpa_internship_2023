@@ -8,11 +8,13 @@ import by.fin.service.dto.mapper.CurrencyMapper;
 import by.fin.service.exception.AlreadyExistsException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class CurrencyServiceImpl implements CurrencyService {
@@ -25,6 +27,8 @@ public class CurrencyServiceImpl implements CurrencyService {
 
         if (currency.getId() != null && currencyRepository.existsById(currency.getId()))
             throw new AlreadyExistsException("Currency already exists! Id: " + currency.getId());
+
+        log.info("Adding currency. Id = {}", newCurrency.getId());
 
         return CurrencyMapper.toDto(currencyRepository.save(currency));
     }

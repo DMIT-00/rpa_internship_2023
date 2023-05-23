@@ -13,12 +13,14 @@ import by.fin.service.dto.mapper.RateMapper;
 import by.fin.service.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class RatesServiceImpl implements RatesService {
@@ -54,6 +56,8 @@ public class RatesServiceImpl implements RatesService {
         );
 
         rates.forEach(currency::addRate);
+
+        log.info("Adding rates. Size = {}", rates.size());
 
         return RateMapper.toDto(ratesRepository.saveAll(rates));
     }
